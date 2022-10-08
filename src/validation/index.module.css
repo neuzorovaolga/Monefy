@@ -1,0 +1,12 @@
+.wrapper {
+  position: relative;
+}
+
+.error {
+  color: lightpink;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  padding: 10px 0;
+  font-size: 12px;
+}

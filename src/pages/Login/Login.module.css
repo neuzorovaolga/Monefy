@@ -1,0 +1,10 @@
+.wrapper {
+  background: #324b4e;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://dgs.org.ua/wp-content/uploads/2020/05/kolektivnaya-monografiya2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
