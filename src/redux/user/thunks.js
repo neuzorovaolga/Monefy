@@ -1,5 +1,6 @@
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "../../firebase/auth";
@@ -7,6 +8,23 @@ import { collection, addDoc } from "firebase/firestore";
 import { userAuthAction } from "./actions";
 import { Card } from "@mui/material";
 import { firebaseAddUserDoc } from "../../firebase/costs";
+
+export const autoLoginThunk = () => {
+  return (dispatch, getState) => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        console.log(user);
+        dispatch(userAuthAction(user));
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  };
+};
 
 export const registerUserThunk = (email, password) => {
   return (dispatch, getState) => {

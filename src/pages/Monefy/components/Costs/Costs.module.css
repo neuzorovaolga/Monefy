@@ -5,6 +5,11 @@
   width: 70rem;
   max-width: 95%;
 }
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .scroll {
   overflow-y: auto;

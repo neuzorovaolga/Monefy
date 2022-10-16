@@ -7,7 +7,6 @@ import {
   query,
   where,
   updateDoc,
-  deleteField,
   getDocs,
   deleteDoc,
   onSnapshot,
@@ -30,9 +29,7 @@ export const firebaseAddCostDoc = (userId, costData) => {
 export const firebaseGetDataCostDoc = async (userId) => {
   const q = query(collection(db, `users/${userId}/costs`));
   const querySnapshot = await getDocs(q);
-  //   querySnapshot.forEach((doc) => {
-  //     console.log(doc.id, " => ", doc.data());
-  //   });
+
   return querySnapshot.docs.map((doc) => {
     return {
       ...doc.data(),

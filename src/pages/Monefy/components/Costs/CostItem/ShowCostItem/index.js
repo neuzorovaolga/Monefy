@@ -27,24 +27,10 @@ export const ShowCostItem = ({ cost, changeForm }) => {
           {cost.sum}
         </div>
       </div>
-      <IconButton
-        sx={{
-          display: "flex",
-          marginBottom: "50px",
-        }}
-        aria-label="delete"
-        onClick={changeForm}
-      >
+      <IconButton aria-label="delete" onClick={changeForm}>
         <CreateOutlinedIcon />
       </IconButton>
-      <IconButton
-        sx={{
-          display: "flex",
-          marginBottom: "50px",
-        }}
-        aria-label="delete"
-        onClick={onDelete}
-      >
+      <IconButton aria-label="delete" onClick={onDelete}>
         <DeleteIcon />
       </IconButton>
     </>
