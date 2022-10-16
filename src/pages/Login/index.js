@@ -47,7 +47,7 @@ export default function LoginPage() {
     if (user) {
       navigate("/monefy");
     }
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <div className={styles.wrapper}>

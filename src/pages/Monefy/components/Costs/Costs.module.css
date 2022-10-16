@@ -1,8 +1,23 @@
 .costs {
   padding: 1rem;
-  /* background-color: #1e585380; */
   background-color: #1f756d9c;
   margin: 2rem auto;
   width: 70rem;
   max-width: 95%;
+}
+
+.scroll {
+  overflow-y: auto;
+  height: 400px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: none;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: white;
 }

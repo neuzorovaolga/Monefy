@@ -1,43 +1,43 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { CostItem } from "./CostItem";
-import "./Costs.module.css";
+import styles from "./Costs.module.css";
 import { Card } from "../../../../components/Card";
 import { CostsFilter } from "./CostsFilter";
+import {
+  firebaseGetDataCostDoc,
+  firebaseOnSnapshotCosts,
+} from "../../../../firebase/costs";
+import { getUserId } from "../../../../redux/user/selectors";
 
-export const Costs = (props) => {
-  const [year, setYear] = useState("2021");
-  const [isLook, setLook] = useState(false);
-  const yearChangeHandler = (year) => {
-    setYear(year);
-  };
+export const Costs = () => {
+  const [costs, setCosts] = useState([]);
+  const [filteredDate, setFilteredDate] = useState(new Date());
+  const userId = useSelector(getUserId);
 
-  const filteredCosts = props.costs.filter((cost) => {
-    return cost.date.getFullYear().toString() === year;
-  });
+  useEffect(() => {
+    const unsubscribe = firebaseOnSnapshotCosts(userId, setCosts, filteredDate);
+    return () => {
+      unsubscribe();
+    };
+  }, [filteredDate]);
+  console.log("costs", costs);
 
   const onDelete = (id) => {
-    props.setCosts(props.costs.filter((costs) => costs.id !== id));
+    // props.setCosts(costs.filter((costs) => costs.id !== id));
   };
 
   return (
     <div>
-      <Card className="costs">
-        <CostsFilter year={year} onChangeYear={yearChangeHandler} />
-        {/* <Diagram costs={filteredCosts} /> */}
-        <div>
-          {filteredCosts.length === 0 ? (
+      <Card className={styles.costs}>
+        {/* <CostsFilter year={year} onChangeYear={yearChangeHandler} /> */}
+        <CostsFilter date={filteredDate} setDate={setFilteredDate} />
+        <div className={styles.scroll}>
+          {costs.length === 0 ? (
             <p>В этом году расходов нет</p>
           ) : (
-            filteredCosts.map((cost) => {
-              return (
-                <CostItem
-                  key={cost.id}
-                  dannie={cost}
-                  allDataCost={props.costs}
-                  sostoznie={isLook}
-                  onDelete={onDelete}
-                />
-              );
+            costs?.map((cost) => {
+              return <CostItem cost={cost} onDelete={onDelete} />;
             })
           )}
         </div>

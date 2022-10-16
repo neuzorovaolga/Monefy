@@ -4,14 +4,14 @@ import AddIcon from "@mui/icons-material/Add";
 import styles from "./AddCosts.module.css";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
-export const AddCosts = (props) => {
+export const AddCosts = ({ changeLook }) => {
   return (
     <div className={styles.wrapper}>
       <Fab
         className={styles.button}
         color="primary"
         aria-label="add"
-        onClick={props.changeLook}
+        onClick={changeLook}
       >
         <AddIcon />
       </Fab>

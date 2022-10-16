@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,11 +8,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { loginConfig, passwordConfig, validate } from "../../validation";
 import { registerUserThunk } from "../../redux/user/thunks";
+import { getUser } from "../../redux/user/selectors";
 import styles from "./Register.module.css";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector(getUser);
   const [loginError, setLoginError] = useState("");
   const [passwordError, setPasswordError] = React.useState("");
   const [passwordConfirmError, setPasswordConfirmError] = useState("");
@@ -39,9 +41,14 @@ export default function RegisterPage() {
 
     if (!loginError && !passwordError && !passwordConfirmError) {
       dispatch(registerUserThunk(login, password));
-      navigate("/monefy");
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/monefy");
+    }
+  }, [user, navigate]);
 
   return (
     <div className={styles.wrapper}>

@@ -10,48 +10,47 @@ import Stack from "@mui/material/Stack";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { getUserId } from "../../../../../../redux/user/selectors";
+import { firebaseUpdateCost } from "../../../../../../firebase/costs";
 
-import styles from "./CostForm.module.css";
-import { getUserId } from "../../../../../redux/user/selectors";
-import { firebaseAddCostDoc } from "../../../../../firebase/costs";
-
-export const CostForm = ({ changeLook }) => {
+export const ChangeCostItem = ({ cost, lookChangeForm }) => {
   const userId = useSelector(getUserId);
-  const [inputName, setInputName] = useState("");
-  const [inputSum, setInputSum] = useState("");
-  const [inputDate, setInputDate] = useState(
+  const [inputChangeName, setInputChangeName] = useState(cost.name);
+  const [inputChangeSum, setInputChangeSum] = useState(cost.sum);
+  const [inputChangeDate, setInputChangeDate] = useState(
     new Date().toISOString().substring(0, 10)
   );
 
   const nameChangeHandler = (event) => {
-    setInputName(event.target.value);
+    setInputChangeName(event.target.value);
   };
 
   const sumChangeHandler = (event) => {
-    setInputSum(event.target.value);
+    setInputChangeSum(event.target.value);
   };
 
   const dateChangeHandler = (newValue) => {
-    setInputDate(newValue);
+    setInputChangeDate(newValue);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const costData = {
-      name: inputName,
-      sum: inputSum,
-      date: new Date(inputDate),
+    const costChangeData = {
+      name: inputChangeName,
+      sum: inputChangeSum,
+      date: new Date(inputChangeDate),
     };
+    firebaseUpdateCost(userId, cost.id, costChangeData);
 
-    firebaseAddCostDoc(userId, costData);
-    // props.addData(costData);
+    // firebaseAddCostDoc(userId, costData);
+    // // props.addData(costData);
 
-    setInputName("");
-    setInputSum("");
+    setInputChangeName("");
+    setInputChangeSum("");
     // setInputDate(new Date);
 
-    changeLook();
+    lookChangeForm();
   };
 
   return (
@@ -71,7 +70,7 @@ export const CostForm = ({ changeLook }) => {
           label="Name of expenses"
           variant="outlined"
           type="text"
-          value={inputName}
+          value={inputChangeName}
           onChange={nameChangeHandler}
         />
         <TextField
@@ -80,7 +79,7 @@ export const CostForm = ({ changeLook }) => {
           label="Amount"
           variant="outlined"
           type="number"
-          value={inputSum}
+          value={inputChangeSum}
           onChange={sumChangeHandler}
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
@@ -91,27 +90,23 @@ export const CostForm = ({ changeLook }) => {
             <DesktopDatePicker
               label="Date desktop"
               inputFormat="MM/DD/YYYY"
-              value={inputDate}
+              value={inputChangeDate}
               onChange={dateChangeHandler}
               renderInput={(params) => <TextField {...params} />}
             />
           </Stack>
         </LocalizationProvider>
-      </Box>
-      <div className={styles.addButton}>
         <Button
-          sx={{ marginRight: "20px" }}
-          type="button"
-          onClick={changeLook}
-          variant="outlined"
-          startIcon={<DeleteIcon />}
+          type="submit"
+          variant="contained"
+          endIcon={<SendIcon />}
+          sx={{
+            marginLeft: "200px",
+          }}
         >
-          Delete
+          Change
         </Button>
-        <Button type="submit" variant="contained" endIcon={<SendIcon />}>
-          Add
-        </Button>
-      </div>
+      </Box>
     </form>
   );
 };
