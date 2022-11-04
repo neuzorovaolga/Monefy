@@ -1,0 +1,47 @@
+.wrapperCost {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 3px;
+  margin-top: 8px;
+  margin: 10px 10px 0 10px;
+  background-color: rgb(197 197 197 / 45%);
+  padding: 5px 5px 5px 5px;
+}
+
+.wrapper {
+  padding: 1rem;
+  background-color: #1f756d9c;
+  margin: 2rem auto;
+  width: 70rem;
+  max-width: 95%;
+  border-radius: 10px;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  width: 97%;
+  margin: 40px auto 10px auto;
+  height: 600px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: none;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: white;
+}
+
+.date {
+  color: rgba(19, 93, 59, 0.787);
+}
+
+.costName {
+  color: rgb(2 87 59);
+}

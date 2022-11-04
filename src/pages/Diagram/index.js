@@ -1,47 +1,41 @@
-import React from "react";
-import { CostsFilter } from "../Monefy/components/Costs/CostsFilter";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SelectedYearFilter } from "../../components/SelectedYearFilter";
+import {
+  getDiagramData,
+  getSelectedYear,
+  getCostsSelectedYear,
+} from "../../redux/costs/selectors";
+import { getCostsYearThunk } from "../../redux/costs/thunks";
+
 import styles from "./Diagram.module.css";
-import { DiagramBar } from "./DiagramBar";
 
-export const Diagram = (props) => {
-  const diagramDataSets = [
-    { label: "Jan", value: 0 },
-    { label: "Feb", value: 0 },
-    { label: "Mar", value: 0 },
-    { label: "Apr", value: 0 },
-    { label: "May", value: 0 },
-    { label: "Jun", value: 0 },
-    { label: "Jul", value: 0 },
-    { label: "Aug", value: 0 },
-    { label: "Sep", value: 0 },
-    { label: "Oct", value: 0 },
-    { label: "Nov", value: 0 },
-    { label: "Dec", value: 0 },
-  ];
+import { NinoDiagram } from "./NinoDiagram";
 
-  props.costs.forEach((cost) => {
-    const costMonth = cost.date.getMonth();
-    diagramDataSets[costMonth].value =
-      Number(diagramDataSets[costMonth].value) + Number(cost.sum);
-  });
+export const Diagram = () => {
+  const selectedYear = useSelector(getSelectedYear);
+  const costsSelectedYear = useSelector(getCostsSelectedYear);
+  const dispatch = useDispatch();
+  const diagramData = useSelector(getDiagramData);
+  useEffect(() => {
+    dispatch(getCostsYearThunk());
+  }, [selectedYear]);
 
-  //   return <Diagram dataSets={diagramDataSets} />;
-  const dataSetsValues = diagramDataSets.map((dataSet) => dataSet.value);
-  const maxMonthCosts = Math.max(...dataSetsValues);
-
+  // const dataSetsValues = diagramData.map((dataSet) => dataSet.value);
+  // const maxMonthCosts = Math.max(...dataSetsValues);
   return (
     <>
       <div className={styles.wrapper}>
-        <CostsFilter />
+        <SelectedYearFilter />
         <div className={styles.diagram}>
-          {diagramDataSets.map((dataSet) => (
-            <DiagramBar
-              key={dataSet.label}
-              value={dataSet.value}
-              maxValue={maxMonthCosts}
-              label={dataSet.label}
-            />
-          ))}
+          {costsSelectedYear.length === 0 ? (
+            <h3 style={{ color: "rgb(0 105 95)" }}>Нет расходов</h3>
+          ) : (
+            <>
+              <NinoDiagram data={diagramData} />
+              <h3>Yearly spending schedule</h3>
+            </>
+          )}
         </div>
       </div>
     </>

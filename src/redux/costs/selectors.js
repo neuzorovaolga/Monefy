@@ -10,3 +10,24 @@ export const getCostsExpenses = createSelector(
     return costsReducer?.dailyExpenses;
   }
 );
+
+export const getDiagramData = createSelector(
+  getCostsReducer,
+  (costsReducer) => {
+    return costsReducer?.diagramsData;
+  }
+);
+
+export const getSelectedYear = createSelector(
+  getCostsReducer,
+  (costsReducer) => {
+    return costsReducer?.selectedYear;
+  }
+);
+
+export const getCostsSelectedYear = createSelector(
+  getCostsReducer,
+  (costsReducer) => {
+    return costsReducer?.costs;
+  }
+);

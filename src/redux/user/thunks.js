@@ -9,19 +9,17 @@ import { userAuthAction } from "./actions";
 import { Card } from "@mui/material";
 import { firebaseAddUserDoc } from "../../firebase/costs";
 
-export const autoLoginThunk = () => {
+export const autoLoginThunk = (setIsChecking) => {
   return (dispatch, getState) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        console.log(user);
         dispatch(userAuthAction(user));
       } else {
         // User is signed out
-        // ...
       }
+      setIsChecking(false);
     });
   };
 };
@@ -71,11 +69,5 @@ export const addNewCard = (date, name, amount) => {
       amount: amount,
     };
     addDoc(userCardCollection, card);
-    dispatch({
-      // type: CARD.CARD_ADD,
-      payload: {
-        card,
-      },
-    });
   };
 };

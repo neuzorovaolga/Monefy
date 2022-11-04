@@ -1,4 +1,4 @@
-.diagram-bar {
+.diagramBar {
   height: 100%;
   min-width: 20px;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.diagram-bar__inner {
+.diagramBarInner {
   height: 100%;
   width: 100%;
   border: 1px solid #313131;
@@ -18,13 +18,13 @@
   justify-content: flex-end;
 }
 
-.diagram-bar__fill {
+.diagramBarFill {
   background-color: #bd8025;
   width: 100%;
   transition: all 0.3s ease-out;
 }
 
-.diagram-bar__label {
+.diagramBarLabel {
   font-weight: bold;
   font-size: 0.5rem;
   text-align: center;

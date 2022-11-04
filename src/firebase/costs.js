@@ -42,7 +42,6 @@ export const firebaseGetDataCostDoc = async (userId) => {
 export const firebaseOnSnapshotCosts = (userId, setCosts, filteredDate) => {
   const startDay = new Date(new Date(filteredDate).setHours(0, 0, 0, 0));
   const endDay = new Date(new Date(filteredDate).setHours(23, 59, 59, 999));
-  console.log(startDay, endDay);
   const q = query(
     collection(db, `users/${userId}/costs`),
     where("date", ">=", startDay),
@@ -70,4 +69,22 @@ export const firebaseDeleteCostDoc = async (userId, id) => {
 export const firebaseUpdateCost = async (userId, id, costData) => {
   const card = doc(db, `users/${userId}/costs`, id);
   await updateDoc(card, costData);
+};
+
+export const firebaseGetCostsYear = async (userId, year) => {
+  const startYear = new Date(year, 0, 1, 0, 0, 0, 0);
+  const endYear = new Date(year, 11, 31, 23, 59, 59, 999);
+  const q = query(
+    collection(db, `users/${userId}/costs`),
+    where("date", ">=", startYear),
+    where("date", "<=", endYear)
+  );
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map((doc) => {
+    return {
+      ...doc.data(),
+      id: doc.id,
+      date: doc.data()?.date?.toDate(),
+    };
+  });
 };

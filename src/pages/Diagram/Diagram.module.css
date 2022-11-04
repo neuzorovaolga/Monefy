@@ -3,18 +3,14 @@
   padding: 1rem;
   margin: 2rem auto;
   width: 70rem;
+  height: 85%;
   max-width: 95%;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.25);
+  color: rgb(0 105 95);
 }
 
 .diagram {
-  padding: 1rem;
-  border-radius: 12px;
-  background-color: #ebc137;
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-  height: 10rem;
+  height: 500px;
 }

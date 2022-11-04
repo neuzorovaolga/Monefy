@@ -1,24 +1,24 @@
 import React from "react";
-import "./DiagramBar.module.css";
+import styles from "./DiagramBar.module.css";
 
 export const DiagramBar = (props) => {
   let barFillHeight = "0%";
-
+  console.log("DiagramBar", props);
   if (props.maxValue > 0) {
     barFillHeight = Math.round((props.value / props.maxValue) * 100) + "%";
   }
 
   return (
-    <div className="diagram-bar">
-      <div className="diagram-bar__inner">
+    <div className={styles.diagramBar}>
+      <div className={styles.diagramBarInner}>
         <div
-          className="diagram-bar__fill"
+          className={styles.diagramBarFill}
           style={{
             height: barFillHeight,
           }}
         ></div>
       </div>
-      <div className="diagram-bar__label">{props.label}</div>
+      <div className={styles.diagramBarLabel}>{props.label}</div>
     </div>
   );
 };

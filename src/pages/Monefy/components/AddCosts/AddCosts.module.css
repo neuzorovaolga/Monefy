@@ -2,23 +2,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* text-align: center; */
   background-color: rgb(144, 207, 197);
   font-family: Verdana, Arial, Helvetica, sans-serif;
-  /* background-color: #aac4d1; */
-  padding: 2rem;
+  padding: 1rem;
   margin: 2rem auto;
   width: 70rem;
   max-width: 95%;
   border-radius: 10px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.25);
 }
-
-/* .button {
-  position: absolute;
-  right: 55px;
-  bottom: 10px;
-} */
 
 .spent {
   display: flex;

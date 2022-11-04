@@ -21,6 +21,7 @@ export const LeftMenu = ({ open, bla }) => {
   console.log(email);
   const onMainPage = () => navigate("/monefy");
   const onDiagram = () => navigate("/diagram");
+  const onRibbon = () => navigate("/ribbon");
   const list = () => (
     <Box sx={{ width: 250 }} role="presentation">
       <List>
@@ -52,7 +53,7 @@ export const LeftMenu = ({ open, bla }) => {
           </ListItemButton>
         </ListItem>
         <ListItem key={"lenta"} disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={onRibbon}>
             <ListItemIcon>
               <CategoryOutlinedIcon color="action" fontSize="medium" />
             </ListItemIcon>

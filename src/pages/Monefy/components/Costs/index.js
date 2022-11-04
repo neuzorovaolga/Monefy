@@ -4,17 +4,13 @@ import { CostItem } from "./CostItem";
 import styles from "./Costs.module.css";
 import { Card } from "../../../../components/Card";
 import { CostsFilter } from "./CostsFilter";
-import {
-  firebaseGetDataCostDoc,
-  firebaseOnSnapshotCosts,
-} from "../../../../firebase/costs";
+import { firebaseOnSnapshotCosts } from "../../../../firebase/costs";
 import { getUserId } from "../../../../redux/user/selectors";
-import { setExpenses } from "../../../../redux/costs/actions";
+import { setExpensesAction } from "../../../../redux/costs/actions";
 
 export const Costs = () => {
   const dispatch = useDispatch();
   const [costs, setCosts] = useState([]);
-  const [dailyExpenses, setDailyExpenses] = useState(0);
   const [filteredDate, setFilteredDate] = useState(new Date());
   const userId = useSelector(getUserId);
 
@@ -24,16 +20,12 @@ export const Costs = () => {
       unsubscribe();
     };
   }, [filteredDate]);
-  console.log("costs", costs);
 
   useEffect(() => {
-    setDailyExpenses(costs.reduce((acc, item) => +acc + +item.sum, 0));
-    dispatch(setExpenses(costs.reduce((acc, item) => +acc + +item.sum, 0)));
+    dispatch(
+      setExpensesAction(costs.reduce((acc, item) => +acc + +item.sum, 0))
+    );
   }, [costs]);
-
-  const onDelete = (id) => {
-    // props.setCosts(costs.filter((costs) => costs.id !== id));
-  };
 
   return (
     <div>
@@ -42,10 +34,10 @@ export const Costs = () => {
 
         <div className={styles.scroll}>
           {costs.length === 0 ? (
-            <p>В этом году расходов нет</p>
+            <h3>Нет расходов</h3>
           ) : (
             costs?.map((cost) => {
-              return <CostItem cost={cost} onDelete={onDelete} />;
+              return <CostItem key={cost.id} cost={cost} />;
             })
           )}
         </div>

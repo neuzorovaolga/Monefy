@@ -29,24 +29,22 @@ const validateEmail = (val) => {
   return /\S+@\S+\.\S+/.test(val) ? "" : "Wrong Email";
 };
 
-export const VALIDATION_TYPE = {
-  IS_EMPTY: "IS_EMPTY",
-  ONLY_NUMBERS: "ONLY_NUMBERS",
-  MIN_LENGTH: "MIN_LENGTH",
-  ONE_UPPERCASE: "ONE_UPPERCASE",
-  ONE_SPEC_SYMBOL: "ONE_SPEC_SYMBOL",
-  NO_SPACES: "NO_SPACES",
-  EMAIL: "EMAIL",
-};
+const IS_EMPTY = "IS_EMPTY";
+const ONLY_NUMBERS = "ONLY_NUMBERS";
+const MIN_LENGTH = "MIN_LENGTH";
+const ONE_UPPERCASE = "ONE_UPPERCASE";
+const ONE_SPEC_SYMBOL = "ONE_SPEC_SYMBOL";
+const NO_SPACES = "NO_SPACES";
+const EMAIL = "EMAIL";
 
 const VALIDATION_HANDLERS = {
-  IS_EMPTY: validateIsEmpty,
-  ONLY_NUMBERS: validateHasNumbers,
-  MIN_LENGTH: validateMinLength,
-  ONE_UPPERCASE: validateOneUppercase,
-  ONE_SPEC_SYMBOL: validateSpecSymbol,
-  NO_SPACES: validateNoSpaces,
-  EMAIL: validateEmail,
+  [IS_EMPTY]: validateIsEmpty,
+  [ONLY_NUMBERS]: validateHasNumbers,
+  [MIN_LENGTH]: validateMinLength,
+  [ONE_UPPERCASE]: validateOneUppercase,
+  [ONE_SPEC_SYMBOL]: validateSpecSymbol,
+  [NO_SPACES]: validateNoSpaces,
+  [EMAIL]: validateEmail,
 };
 
 export const validate = (val, config) => {
@@ -56,15 +54,6 @@ export const validate = (val, config) => {
       : VALIDATION_HANDLERS[validationFuncName](val);
   }, "");
 };
-
-const {
-  ONLY_NUMBERS,
-  NO_SPACES,
-  ONE_UPPERCASE,
-  ONE_SPEC_SYMBOL,
-  IS_EMPTY,
-  EMAIL,
-} = VALIDATION_TYPE;
 
 export const loginConfig = [ONLY_NUMBERS, NO_SPACES, IS_EMPTY, EMAIL];
 export const passwordConfig = [ONE_UPPERCASE, ONE_SPEC_SYMBOL, NO_SPACES];

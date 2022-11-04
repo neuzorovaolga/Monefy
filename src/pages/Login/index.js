@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import { loginConfig, passwordConfig } from "../../validation";
 import { validate } from "../../validation";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,6 +32,9 @@ export default function LoginPage() {
       password: data.get("password"),
     };
 
+    // const login = data.get("login");
+    // const password = data.get("password");
+
     const loginError = validate(login, loginConfig);
     const passwordError = validate(password, passwordConfig);
 
@@ -47,7 +50,7 @@ export default function LoginPage() {
     if (user) {
       navigate("/monefy");
     }
-  }, [user, navigate]);
+  }, [user]);
 
   return (
     <div className={styles.wrapper}>
