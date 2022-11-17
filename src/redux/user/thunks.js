@@ -3,18 +3,14 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth, db } from "../../firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { auth } from "../../firebase/auth";
 import { userAuthAction } from "./actions";
-import { Card } from "@mui/material";
 import { firebaseAddUserDoc } from "../../firebase/costs";
 
 export const autoLoginThunk = (setIsChecking) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
         dispatch(userAuthAction(user));
       } else {
         // User is signed out
@@ -25,7 +21,7 @@ export const autoLoginThunk = (setIsChecking) => {
 };
 
 export const registerUserThunk = (email, password) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -40,10 +36,9 @@ export const registerUserThunk = (email, password) => {
 };
 
 export const loginUserThunk = (email, password) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         dispatch(userAuthAction(user));
       })
@@ -51,23 +46,5 @@ export const loginUserThunk = (email, password) => {
         // const errorCode = error.code;
         // const errorMessage = error.message;
       });
-  };
-};
-
-export const addNewCard = (date, name, amount) => {
-  return (dispatch, getState) => {
-    const {
-      user: {
-        user: { uid },
-      },
-    } = getState();
-
-    const userCardCollection = collection(db, "users/${uid}/cards");
-    const card = {
-      date: date,
-      purchase: name,
-      amount: amount,
-    };
-    addDoc(userCardCollection, card);
   };
 };

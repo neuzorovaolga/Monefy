@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 
 export const AddCosts = ({ changeLook }) => {
   const costsExpenses = useSelector(getCostsExpenses);
-  console.log("costsExpenses", costsExpenses);
   return (
     <div className={styles.wrapper}>
       <Fab

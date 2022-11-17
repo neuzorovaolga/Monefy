@@ -3,16 +3,15 @@ import { Navbar } from "./Navbar";
 import { LeftMenu } from "./LeftMenu";
 
 export const MenuBar = ({ content }) => {
-  const [isMenuHandler, setIsMenuHandler] = useState(false);
+  const [isMenu, setIsMenu] = useState(false);
   const menuClick = () => {
-    setIsMenuHandler((prev) => !prev);
-    console.log(isMenuHandler);
+    setIsMenu((prev) => !prev);
   };
 
   return (
     <>
       <Navbar menuClick={menuClick} />
-      {isMenuHandler && <LeftMenu open={isMenuHandler} bla={menuClick} />}
+      {isMenu && <LeftMenu open={isMenu} onClose={menuClick} />}
       {content}
     </>
   );

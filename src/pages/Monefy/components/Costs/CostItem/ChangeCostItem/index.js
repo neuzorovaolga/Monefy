@@ -43,13 +43,8 @@ export const ChangeCostItem = ({ cost, lookChangeForm }) => {
     };
     firebaseUpdateCost(userId, cost.id, costChangeData);
 
-    // firebaseAddCostDoc(userId, costData);
-    // // props.addData(costData);
-
     setInputChangeName("");
     setInputChangeSum("");
-    // setInputDate(new Date);
-
     lookChangeForm();
   };
 

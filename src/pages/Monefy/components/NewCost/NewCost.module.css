@@ -8,3 +8,9 @@
   text-align: center;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.25);
 }
+
+.addButton {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 15px;
+}

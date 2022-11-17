@@ -15,10 +15,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getUserEmail } from "../../../redux/user/selectors";
 
-export const LeftMenu = ({ open, bla }) => {
+export const LeftMenu = ({ open, onClose }) => {
   const navigate = useNavigate();
   const email = useSelector(getUserEmail);
-  console.log(email);
   const onMainPage = () => navigate("/monefy");
   const onDiagram = () => navigate("/diagram");
   const onRibbon = () => navigate("/ribbon");
@@ -65,7 +64,7 @@ export const LeftMenu = ({ open, bla }) => {
   );
 
   return (
-    <Drawer anchor={"left"} open={open} onClose={bla}>
+    <Drawer anchor={"left"} open={open} onClose={onClose}>
       {list()}
     </Drawer>
   );

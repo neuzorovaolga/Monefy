@@ -17,12 +17,11 @@ export const Diagram = () => {
   const costsSelectedYear = useSelector(getCostsSelectedYear);
   const dispatch = useDispatch();
   const diagramData = useSelector(getDiagramData);
+
   useEffect(() => {
     dispatch(getCostsYearThunk());
   }, [selectedYear]);
 
-  // const dataSetsValues = diagramData.map((dataSet) => dataSet.value);
-  // const maxMonthCosts = Math.max(...dataSetsValues);
   return (
     <>
       <div className={styles.wrapper}>

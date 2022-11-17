@@ -1,13 +1,12 @@
 import { firebaseGetCostsYear } from "../../firebase/costs";
 import { costsDataAction, diagramsAction } from "./actions";
-import { diagramsInitial } from "./costsReducer";
 
 export const getCostsYearThunk = () => {
   return (dispatch, getState) => {
     const { userReducer, costsReducer } = getState();
     const userId = userReducer.userData.uid;
     const year = costsReducer.selectedYear;
-    console.log("year", year);
+
     firebaseGetCostsYear(userId, year).then((data) => {
       dispatch(costsDataAction(data));
 

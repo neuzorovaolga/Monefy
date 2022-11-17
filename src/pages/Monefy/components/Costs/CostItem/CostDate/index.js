@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./CostDate.module.css";
 export const CostDate = ({ data }) => {
-  console.log(data);
   const month = data.toLocaleString("ru-RU", { month: "long" });
   const year = data.getFullYear();
   const day = data.toLocaleString("ru-RU", { day: "2-digit" });

@@ -26,19 +26,6 @@ export const firebaseAddCostDoc = (userId, costData) => {
   addDoc(userCostsCollection, costData);
 };
 
-export const firebaseGetDataCostDoc = async (userId) => {
-  const q = query(collection(db, `users/${userId}/costs`));
-  const querySnapshot = await getDocs(q);
-
-  return querySnapshot.docs.map((doc) => {
-    return {
-      ...doc.data(),
-      id: doc.id,
-      date: new Date(doc.data()?.date?.seconds),
-    };
-  });
-};
-
 export const firebaseOnSnapshotCosts = (userId, setCosts, filteredDate) => {
   const startDay = new Date(new Date(filteredDate).setHours(0, 0, 0, 0));
   const endDay = new Date(new Date(filteredDate).setHours(23, 59, 59, 999));

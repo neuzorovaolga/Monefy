@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Monefy } from "./pages/Monefy";
 import { Diagram } from "./pages/Diagram";
 import { MenuBar } from "./components/MenuBar";
 import RegisterPage from "./pages/Register";
 import LoginPage from "./pages/Login";
 import { PrivateRoute } from "./components/PrivateRoute";
-import { checkLoginUser } from "./firebase/auth";
 import { useDispatch } from "react-redux";
 import { autoLoginThunk } from "./redux/user/thunks";
 import { AccordionRibbon } from "./pages/AccordionRibbon";
@@ -51,6 +50,8 @@ export const AppRouter = () => {
                 </PrivateRoute>
               }
             />
+
+            <Route path="/*" element={<Navigate to="/" />} />
           </Routes>
         </BrowserRouter>
       )}

@@ -2,20 +2,18 @@ import React, { useEffect } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { SelectedYearFilter } from "../../components/SelectedYearFilter";
 import { useDispatch, useSelector } from "react-redux";
 import { getDiagramData, getSelectedYear } from "../../redux/costs/selectors";
 import { getCostsYearThunk } from "../../redux/costs/thunks";
-
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import styles from "./AccordionRibbon.module.css";
 
 export const AccordionRibbon = () => {
   const selectedYear = useSelector(getSelectedYear);
   const dispatch = useDispatch();
   const diagramData = useSelector(getDiagramData);
+
   useEffect(() => {
     dispatch(getCostsYearThunk());
   }, [selectedYear]);
@@ -35,14 +33,12 @@ export const AccordionRibbon = () => {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography>
-                  <div style={{ color: "rgb(0 105 95)", fontWeight: "bold" }}>
-                    {data.label} ( {data.value} $ )
-                  </div>
-                </Typography>
+                <div style={{ color: "rgb(0 105 95)", fontWeight: "bold" }}>
+                  {data.label} ( {data.value} $ )
+                </div>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>
+                <>
                   {data.value === 0 ? (
                     <div style={{ color: "rgba(19, 93, 59, 0.787" }}>
                       Нет расходов
@@ -67,7 +63,7 @@ export const AccordionRibbon = () => {
                       })}
                     </>
                   )}
-                </Typography>
+                </>
               </AccordionDetails>
             </Accordion>
           );
