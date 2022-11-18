@@ -16,7 +16,7 @@ export default function RegisterPage() {
   const navigate = useNavigate();
   const user = useSelector(getUser);
   const [loginError, setLoginError] = useState("");
-  const [passwordError, setPasswordError] = React.useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [passwordConfirmError, setPasswordConfirmError] = useState("");
 
   const handleSubmit = (event) => {
@@ -48,7 +48,7 @@ export default function RegisterPage() {
     if (user) {
       navigate("/monefy");
     }
-  }, [user, navigate]);
+  }, [user]);
 
   return (
     <div className={styles.wrapper}>

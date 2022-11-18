@@ -14,6 +14,7 @@ import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getUserEmail } from "../../../redux/user/selectors";
+import { Button } from "@mui/material";
 
 export const LeftMenu = ({ open, onClose }) => {
   const navigate = useNavigate();

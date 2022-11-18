@@ -12,8 +12,6 @@ export const autoLoginThunk = (setIsChecking) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(userAuthAction(user));
-      } else {
-        // User is signed out
       }
       setIsChecking(false);
     });

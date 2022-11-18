@@ -23,20 +23,18 @@ export const Diagram = () => {
   }, [selectedYear]);
 
   return (
-    <>
-      <div className={styles.wrapper}>
-        <SelectedYearFilter />
-        <div className={styles.diagram}>
-          {costsSelectedYear.length === 0 ? (
-            <h3 style={{ color: "rgb(0 105 95)" }}>Нет расходов</h3>
-          ) : (
-            <>
-              <NinoDiagram data={diagramData} />
-              <h3>Yearly spending schedule</h3>
-            </>
-          )}
-        </div>
+    <div className={styles.wrapper}>
+      <SelectedYearFilter />
+      <div className={styles.diagram}>
+        {costsSelectedYear.length === 0 ? (
+          <h3 style={{ color: "rgb(0 105 95)" }}>Нет расходов</h3>
+        ) : (
+          <>
+            <NinoDiagram data={diagramData} />
+            <h3>Yearly spending schedule</h3>
+          </>
+        )}
       </div>
-    </>
+    </div>
   );
 };

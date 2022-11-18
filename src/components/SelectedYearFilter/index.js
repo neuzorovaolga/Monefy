@@ -11,6 +11,10 @@ import { costsSelectedYearAction } from "../../redux/costs/actions";
 export const SelectedYearFilter = () => {
   const selectedYear = useSelector(getSelectedYear);
   const dispatch = useDispatch();
+
+  const handlerOnChange = (newValue) => {
+    dispatch(costsSelectedYearAction(`${newValue.$y}`));
+  };
   return (
     <div className={styles.wrapper}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -20,9 +24,7 @@ export const SelectedYearFilter = () => {
           value={selectedYear}
           minDate={"2017"}
           maxDate={"2030"}
-          onChange={(newValue) => {
-            dispatch(costsSelectedYearAction(`${newValue.$y}`));
-          }}
+          onChange={handlerOnChange}
           renderInput={(params) => <TextField {...params} helperText={null} />}
         />
       </LocalizationProvider>
