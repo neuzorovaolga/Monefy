@@ -9,7 +9,7 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import { useDispatch } from "react-redux";
 import { autoLoginThunk } from "./redux/user/thunks";
 import { AccordionRibbon } from "./pages/AccordionRibbon";
-import { CircularProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 export const AppRouter = () => {
   const [isCheking, setIsChecking] = useState(true);
@@ -20,7 +20,16 @@ export const AppRouter = () => {
 
   return (
     <>
-      {isCheking && <CircularProgress color="inherit" />}
+      {isCheking && (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+        >
+          <CircularProgress size="6rem" />
+        </Box>
+      )}
       {!isCheking && (
         <BrowserRouter>
           <Routes>
@@ -46,7 +55,7 @@ export const AppRouter = () => {
               path="/diagram"
               element={
                 <PrivateRoute>
-                  <MenuBar content={<Diagram costs={[]} />} />
+                  <MenuBar content={<Diagram />} />
                 </PrivateRoute>
               }
             />

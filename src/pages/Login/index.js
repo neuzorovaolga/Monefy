@@ -13,7 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUserThunk } from "../../redux/user/thunks";
 import styles from "./Login.module.css";
-import { getUser } from "../../redux/user/selectors";
+import { getUser, getUserError } from "../../redux/user/selectors";
+import { AuthError } from "../../components/AuthError";
+import { userErrorAction } from "../../redux/user/actions";
 
 const theme = createTheme();
 
@@ -26,6 +28,7 @@ export default function LoginPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(userErrorAction(""));
     const data = new FormData(event.currentTarget);
     const { login, password } = {
       login: data.get("login"),
@@ -98,6 +101,7 @@ export default function LoginPage() {
               type="password"
               id="password"
             />
+            <AuthError />
             <Button
               type="submit"
               fullWidth

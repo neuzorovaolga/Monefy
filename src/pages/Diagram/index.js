@@ -10,7 +10,7 @@ import { getCostsYearThunk } from "../../redux/costs/thunks";
 
 import styles from "./Diagram.module.css";
 
-import { NinoDiagram } from "./NinoDiagram";
+import { NivoDiagram } from "./NivoDiagram";
 
 export const Diagram = () => {
   const selectedYear = useSelector(getSelectedYear);
@@ -30,7 +30,7 @@ export const Diagram = () => {
           <h3 style={{ color: "rgb(0 105 95)" }}>Нет расходов</h3>
         ) : (
           <>
-            <NinoDiagram data={diagramData} />
+            <NivoDiagram data={diagramData} />
             <h3>Yearly spending schedule</h3>
           </>
         )}

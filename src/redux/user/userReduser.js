@@ -2,6 +2,7 @@ import { USER } from "./consts";
 
 const initialState = {
   userData: null,
+  userError: null,
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -15,6 +16,11 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userData: null,
+      };
+    case USER.USER_ERROR:
+      return {
+        ...state,
+        userError: action.payload.error,
       };
 
     default:

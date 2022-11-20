@@ -14,7 +14,6 @@ import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getUserEmail } from "../../../redux/user/selectors";
-import { Button } from "@mui/material";
 
 export const LeftMenu = ({ open, onClose }) => {
   const navigate = useNavigate();
@@ -41,23 +40,23 @@ export const LeftMenu = ({ open, onClose }) => {
             <ListItemIcon>
               <HomeOutlinedIcon color="action" />
             </ListItemIcon>
-            <ListItemText primary={"Главная"} fontSize="medium" />
+            <ListItemText primary={"Main"} fontSize="medium" />
           </ListItemButton>
         </ListItem>
-        <ListItem key={"Графики"} disablePadding>
+        <ListItem key={"Diagram"} disablePadding>
           <ListItemButton onClick={onDiagram}>
             <ListItemIcon>
               <QueryStatsIcon color="action" fontSize="medium" />
             </ListItemIcon>
-            <ListItemText primary={"Графики"} />
+            <ListItemText primary={"Diagram"} />
           </ListItemButton>
         </ListItem>
-        <ListItem key={"lenta"} disablePadding>
+        <ListItem key={"Ribbon"} disablePadding>
           <ListItemButton onClick={onRibbon}>
             <ListItemIcon>
               <CategoryOutlinedIcon color="action" fontSize="medium" />
             </ListItemIcon>
-            <ListItemText primary={"Лента"} />
+            <ListItemText primary={"Ribbon"} />
           </ListItemButton>
         </ListItem>
       </List>

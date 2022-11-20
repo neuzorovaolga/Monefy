@@ -3,6 +3,7 @@ export const COSTS = {
   COSTS_DIAGRAMS: "COSTS_DIAGRAMS",
   COSTS_DATA: "COSTS_DATA",
   COSTS_SELECTED_YEAR: "COSTS_SELECTED_YEAR",
+  COSTS_SELECTED_DAY: "COSTS_SELECTED_DAY",
 };
 
 export const diagramsInitial = [
@@ -25,6 +26,7 @@ const initialState = {
   costs: [],
   diagramsData: diagramsInitial,
   selectedYear: "2022",
+  selectedDay: new Date(),
 };
 
 export const costsReducer = (state = initialState, action) => {
@@ -51,6 +53,12 @@ export const costsReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedYear: action.payload,
+      };
+
+    case COSTS.COSTS_SELECTED_DAY:
+      return {
+        ...state,
+        selectedDay: action.payload,
       };
 
     default:

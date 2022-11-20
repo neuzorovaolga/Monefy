@@ -15,3 +15,7 @@ export const getUserEmail = createSelector(getUserReducer, (userReducer) => {
 export const getUserId = createSelector(getUserReducer, (userReducer) => {
   return userReducer?.userData?.uid;
 });
+
+export const getUserError = createSelector(getUserReducer, (userReducer) => {
+  return userReducer?.userError;
+});

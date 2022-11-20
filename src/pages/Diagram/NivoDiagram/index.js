@@ -1,6 +1,6 @@
 import { ResponsivePie } from "@nivo/pie";
 
-export const NinoDiagram = ({ data }) => (
+export const NivoDiagram = ({ data }) => (
   <ResponsivePie
     data={data}
     margin={{ top: 40, right: 80, bottom: 80, left: 80 }}

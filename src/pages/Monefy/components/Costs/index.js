@@ -2,24 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CostItem } from "./CostItem";
 import styles from "./Costs.module.css";
-import { Card } from "../../../../components/Card";
 import { CostsFilter } from "./CostsFilter";
 import { firebaseOnSnapshotCosts } from "../../../../firebase/costs";
 import { getUserId } from "../../../../redux/user/selectors";
 import { setExpensesAction } from "../../../../redux/costs/actions";
+import { getSelectedDay } from "../../../../redux/costs/selectors";
 
 export const Costs = () => {
   const dispatch = useDispatch();
   const [costs, setCosts] = useState([]);
-  const [filteredDate, setFilteredDate] = useState(new Date());
+  const selectedDay = useSelector(getSelectedDay);
   const userId = useSelector(getUserId);
 
   useEffect(() => {
-    const unsubscribe = firebaseOnSnapshotCosts(userId, setCosts, filteredDate);
+    const unsubscribe = firebaseOnSnapshotCosts(userId, setCosts, selectedDay);
     return () => {
       unsubscribe();
     };
-  }, [filteredDate]);
+  }, [selectedDay]);
 
   useEffect(() => {
     dispatch(
@@ -29,8 +29,8 @@ export const Costs = () => {
 
   return (
     <div>
-      <Card className={styles.costs}>
-        <CostsFilter date={filteredDate} setDate={setFilteredDate} />
+      <div className={styles.costs}>
+        <CostsFilter />
 
         <div className={styles.scroll}>
           {costs.length === 0 ? (
@@ -41,7 +41,7 @@ export const Costs = () => {
             })
           )}
         </div>
-      </Card>
+      </div>
     </div>
   );
 };

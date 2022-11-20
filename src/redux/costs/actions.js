@@ -5,17 +5,22 @@ export const setExpensesAction = (sum) => ({
   payload: sum,
 });
 
-export const diagramsAction = (data) => ({
+export const setDiagramsAction = (data) => ({
   type: COSTS.COSTS_DIAGRAMS,
   payload: data,
 });
 
-export const costsDataAction = (data) => ({
+export const setCostsDataAction = (data) => ({
   type: COSTS.COSTS_DATA,
   payload: data,
 });
 
-export const costsSelectedYearAction = (year) => ({
+export const setSelectedYearCostsAction = (year) => ({
   type: COSTS.COSTS_SELECTED_YEAR,
   payload: year,
+});
+
+export const setSelectedDayCostsAction = (day) => ({
+  type: COSTS.COSTS_SELECTED_DAY,
+  payload: day,
 });

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
@@ -13,14 +13,15 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import styles from "./NewCost.module.css";
 import { getUserId } from "../../../../redux/user/selectors";
 import { firebaseAddCostDoc } from "../../../../firebase/costs";
+import { getSelectedDay } from "../../../../redux/costs/selectors";
+import { Grid } from "@mui/material";
 
 export const NewCost = ({ changeLook }) => {
   const userId = useSelector(getUserId);
+  const selectedDay = useSelector(getSelectedDay);
   const [inputName, setInputName] = useState("");
   const [inputSum, setInputSum] = useState("");
-  const [inputDate, setInputDate] = useState(
-    new Date().toISOString().substring(0, 10)
-  );
+  const [inputDate, setInputDate] = useState(selectedDay);
 
   const nameChangeHandler = (event) => {
     setInputName(event.target.value);
@@ -30,17 +31,13 @@ export const NewCost = ({ changeLook }) => {
     setInputSum(event.target.value);
   };
 
-  const dateChangeHandler = (newValue) => {
-    setInputDate(newValue);
-  };
-
   const submitHandler = (event) => {
     event.preventDefault();
 
     const costData = {
       name: inputName,
       sum: inputSum,
-      date: new Date(inputDate),
+      date: inputDate,
     };
 
     firebaseAddCostDoc(userId, costData);
@@ -51,14 +48,12 @@ export const NewCost = ({ changeLook }) => {
 
   return (
     <div className={styles.newCost}>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className={styles.form}>
         <Box
           sx={{
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            padding: "20px",
-            borderRadius: "8px",
           }}
         >
           <TextField
@@ -77,6 +72,7 @@ export const NewCost = ({ changeLook }) => {
             label="Amount"
             variant="outlined"
             type="number"
+            inputProps={{ min: 0 }}
             value={inputSum}
             onChange={sumChangeHandler}
             InputProps={{
@@ -91,8 +87,15 @@ export const NewCost = ({ changeLook }) => {
                 label="Date desktop"
                 inputFormat="MM/DD/YYYY"
                 value={inputDate}
-                onChange={dateChangeHandler}
-                renderInput={(params) => <TextField {...params} />}
+                onChange={(newValue) => {
+                  setInputDate(newValue.toDate());
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    inputProps={{ ...params.inputProps, readOnly: true }}
+                  />
+                )}
               />
             </Stack>
           </LocalizationProvider>

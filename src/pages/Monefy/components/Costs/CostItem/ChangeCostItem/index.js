@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -12,14 +11,14 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { getUserId } from "../../../../../../redux/user/selectors";
 import { firebaseUpdateCost } from "../../../../../../firebase/costs";
+import { getSelectedDay } from "../../../../../../redux/costs/selectors";
 
 export const ChangeCostItem = ({ cost, lookChangeForm }) => {
   const userId = useSelector(getUserId);
+  const selectedDay = useSelector(getSelectedDay);
   const [inputChangeName, setInputChangeName] = useState(cost.name);
   const [inputChangeSum, setInputChangeSum] = useState(cost.sum);
-  const [inputChangeDate, setInputChangeDate] = useState(
-    new Date().toISOString().substring(0, 10)
-  );
+  const [inputChangeDate, setInputChangeDate] = useState(selectedDay);
 
   const nameChangeHandler = (event) => {
     setInputChangeName(event.target.value);
@@ -74,6 +73,7 @@ export const ChangeCostItem = ({ cost, lookChangeForm }) => {
           label="Amount"
           variant="outlined"
           type="number"
+          inputProps={{ min: 0 }}
           value={inputChangeSum}
           onChange={sumChangeHandler}
           InputProps={{
@@ -87,7 +87,12 @@ export const ChangeCostItem = ({ cost, lookChangeForm }) => {
               inputFormat="MM/DD/YYYY"
               value={inputChangeDate}
               onChange={dateChangeHandler}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  inputProps={{ ...params.inputProps, readOnly: true }}
+                />
+              )}
             />
           </Stack>
         </LocalizationProvider>

@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../../firebase/auth";
-import { userAuthAction } from "./actions";
+import { userAuthAction, userErrorAction } from "./actions";
 import { firebaseAddUserDoc } from "../../firebase/costs";
 
 export const autoLoginThunk = (setIsChecking) => {
@@ -27,8 +27,8 @@ export const registerUserThunk = (email, password) => {
         dispatch(userAuthAction(user));
       })
       .catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
+        const errorMessage = error.message;
+        dispatch(userErrorAction(errorMessage));
       });
   };
 };
@@ -41,8 +41,8 @@ export const loginUserThunk = (email, password) => {
         dispatch(userAuthAction(user));
       })
       .catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
+        const errorMessage = error.message;
+        dispatch(userErrorAction(errorMessage));
       });
   };
 };

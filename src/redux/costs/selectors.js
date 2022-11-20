@@ -25,6 +25,13 @@ export const getSelectedYear = createSelector(
   }
 );
 
+export const getSelectedDay = createSelector(
+  getCostsReducer,
+  (costsReducer) => {
+    return costsReducer?.selectedDay;
+  }
+);
+
 export const getCostsSelectedYear = createSelector(
   getCostsReducer,
   (costsReducer) => {

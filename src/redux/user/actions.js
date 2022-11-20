@@ -8,3 +8,8 @@ export const userAuthAction = (user) => ({
 export const userLogoutAction = () => ({
   type: USER.USER_LOGOUT,
 });
+
+export const userErrorAction = (error) => ({
+  type: USER.USER_ERROR,
+  payload: { error },
+});

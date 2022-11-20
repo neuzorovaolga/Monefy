@@ -27,8 +27,8 @@ export const firebaseAddCostDoc = (userId, costData) => {
 };
 
 export const firebaseOnSnapshotCosts = (userId, setCosts, filteredDate) => {
-  const startDay = new Date(new Date(filteredDate).setHours(0, 0, 0, 0));
-  const endDay = new Date(new Date(filteredDate).setHours(23, 59, 59, 999));
+  const startDay = new Date(filteredDate.setHours(0, 0, 0, 0));
+  const endDay = new Date(filteredDate.setHours(23, 59, 59, 999));
   const q = query(
     collection(db, `users/${userId}/costs`),
     where("date", ">=", startDay),

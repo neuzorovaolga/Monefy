@@ -1,4 +1,5 @@
 export const USER = {
   USER_AUTH: "USER_AUTH",
   USER_LOGOUT: "USER_LOGOUT",
+  USER_ERROR: "USER_ERROR",
 };

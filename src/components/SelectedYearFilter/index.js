@@ -6,14 +6,17 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import styles from "./SelectedYearFilter.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedYear } from "../../redux/costs/selectors";
-import { costsSelectedYearAction } from "../../redux/costs/actions";
+import { setSelectedYearCostsAction } from "../../redux/costs/actions";
+
+const MIN_DATE = "2017";
+const MAX_DATE = "2030";
 
 export const SelectedYearFilter = () => {
   const selectedYear = useSelector(getSelectedYear);
   const dispatch = useDispatch();
 
   const handlerOnChange = (newValue) => {
-    dispatch(costsSelectedYearAction(`${newValue.$y}`));
+    dispatch(setSelectedYearCostsAction(`${newValue.year()}`));
   };
   return (
     <div className={styles.wrapper}>
@@ -22,8 +25,8 @@ export const SelectedYearFilter = () => {
           views={["year"]}
           label="Selected year"
           value={selectedYear}
-          minDate={"2017"}
-          maxDate={"2030"}
+          minDate={MIN_DATE}
+          maxDate={MAX_DATE}
           onChange={handlerOnChange}
           renderInput={(params) => <TextField {...params} helperText={null} />}
         />

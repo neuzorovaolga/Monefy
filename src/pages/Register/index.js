@@ -10,6 +10,8 @@ import { loginConfig, passwordConfig, validate } from "../../validation";
 import { registerUserThunk } from "../../redux/user/thunks";
 import { getUser } from "../../redux/user/selectors";
 import styles from "./Register.module.css";
+import { AuthError } from "../../components/AuthError";
+import { userErrorAction } from "../../redux/user/actions";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ export default function RegisterPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(userErrorAction(""));
     const data = new FormData(event.currentTarget);
     const { login, password, passwordConfirm } = {
       login: data.get("login"),
@@ -104,6 +107,7 @@ export default function RegisterPage() {
               type="password"
               id="passwordConfirm"
             />
+            <AuthError />
             <Button
               type="submit"
               fullWidth
